@@ -1,0 +1,93 @@
+/* Home Page Styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #1e293b, #111827);
+  color: #0a0a0a;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 50px;
+  width: 100%;
+}
+.mainc{
+  display: flex;
+  flex-direction: column;
+}
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Animated Gradient Background */
+.animated-gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(/src/assets/ai-generated-8331364_1280.webp) cover / no-repeat;
+  z-index: 1;
+}
+
+/* Hero Title Styling */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* Gradient Text Effect */
+.gradient-text {
+  background: blue;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtitle */
+.subtitle {
+  display: block;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #232392;
+}
+
+/* Hero Description */
+.hero-description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  max-width: 700px;
+  color: #0d0e10;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.6rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+}

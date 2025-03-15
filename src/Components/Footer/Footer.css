@@ -1,0 +1,141 @@
+.footer {
+    width: 100%;
+    background: linear-gradient(to right, #c11809, #e36f11); /* Soft gradient */
+    color: #333; /* Darker text for contrast */
+  
+    padding: 10px;
+    padding: 15px 0;
+   
+  }
+  
+  .footer-container {
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .footer-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 32px;
+    margin: 0 30px;
+  }
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .brand-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  
+  .brand-description {
+    color: #171616;
+    line-height: 1.6;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-links a {
+    color: #131212;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #1a1a1a;
+  }
+  
+ 
+  
+  .footer-bottom {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid #191717;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo img {
+    width: 120px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 0.5rem; /* Adjust spacing below the logo */
+  }
+  .social-links {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: #b4afaf;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .social-link:hover {
+    background-color: #8eb0c3;
+    transform: translateY(-2px);
+  }
+  
+  .social-icon {
+    width: 20px;
+    height: 20px;
+    color: #0b0a0a;
+  }
+  
+  .copyright {
+    color: #0f0e0e;
+    font-size: 14px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-bottom {
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+    }
+    
+    .social-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
