@@ -1,10 +1,36 @@
-
 import PropTypes from 'prop-types';
-import { Github, Instagram, Linkedin, Mail, Youtube ,CircleArrowOutUpRight} from 'lucide-react';
-import './Footer.css';
-import logoN from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
+import {
+  ArrowUpRight,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  PenLine,
+  Youtube,
+} from 'lucide-react';
+import Logo from '../Logo/Logo';
+import './Footer.css';
 
+const socialLinks = [
+  { href: 'https://github.com/Nareshedagotti', icon: Github, label: 'GitHub' },
+  {
+    href: 'https://www.linkedin.com/in/naresh-edagotti-6a71a1233/',
+    icon: Linkedin,
+    label: 'LinkedIn',
+  },
+  { href: 'https://www.youtube.com/@StatfusionAI', icon: Youtube, label: 'YouTube' },
+  { href: 'https://medium.com/@statfusionai', icon: PenLine, label: 'Medium' },
+  { href: 'https://www.instagram.com/statfusionai/', icon: Instagram, label: 'Instagram' },
+  { href: 'mailto:statfusionai@gmail.com', icon: Mail, label: 'Email' },
+];
+
+const quickLinks = [
+  { to: '/home', label: 'Home' },
+  { to: '/about', label: 'About' },
+  { to: '/project', label: 'Projects' },
+  { to: '/contact', label: 'Contact' },
+];
 
 const SocialLink = ({ href, icon: Icon, label }) => (
   <a
@@ -14,63 +40,80 @@ const SocialLink = ({ href, icon: Icon, label }) => (
     target="_blank"
     rel="noopener noreferrer"
   >
-    <Icon className="social-icon" />
+    <Icon size={18} />
   </a>
 );
 
 SocialLink.propTypes = {
   href: PropTypes.string.isRequired,
   icon: PropTypes.elementType.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
 };
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
-  const socialLinks = [
-    { href: "https://github.com/Nareshedagotti", icon: Github, label: "GitHub" },
-    { href: "https://www.linkedin.com/in/naresh-edagotti-6a71a1233/", icon: Linkedin, label: "LinkedIn" },
-    { href: "https://www.youtube.com/@StatfusionAI", icon:Youtube , label: "Youtube" },
-    { href: "https://medium.com/@statfusionai", icon:CircleArrowOutUpRight , label: "Youtube" },
-    { href: "https://www.instagram.com/statfusionai/", icon: Instagram, label: "Instagram" },
-    { href: "mailto:statfusionai@gmail.com", icon: Mail, label: "Email" }
-  ];
 
   return (
     <footer className="footer">
-      <div className="footer-container">
-        {/* Main Footer Content */}
+      <div className="container">
         <div className="footer-grid">
-          {/* Brand Section */}
-          <div className="footer-section">
-            
-            <h2 className="brand-title">Naresh Edagotti</h2>
-            <p className="brand-description">
-              Creating amazing web experiences with modern technologies.
+          <div className="footer-brand">
+            <Logo tagline="AI &amp; Data Science" />
+            <p>
+              Building machine learning, NLP and analytics products that turn data into
+              decisions people can act on.
             </p>
+            <a className="footer-cta" href="mailto:statfusionai@gmail.com">
+              statfusionai@gmail.com <ArrowUpRight size={16} />
+            </a>
           </div>
 
-          {/* Quick Links */}
-          <div className="footer-section">
-            <h3 className="section-title">Quick Links</h3>
-            <ul className="footer-links">
-            <li><Link to="/home">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li> <Link to="/project">Projects</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+          <nav className="footer-nav" aria-label="Footer">
+            <h3>Explore</h3>
+            <ul>
+              {quickLinks.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to}>{link.label}</Link>
+                </li>
+              ))}
             </ul>
-          </div>
-          <div>
-            <a href=""></a>
-          </div>
-          <div className="logo">
-            <img src={logoN} alt="logo" />
-            <h3>Always available</h3>
+          </nav>
+
+          <div className="footer-nav">
+            <h3>Elsewhere</h3>
+            <ul>
+              <li>
+                <a href="https://github.com/Nareshedagotti" target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/naresh-edagotti-6a71a1233/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="https://medium.com/@statfusionai" target="_blank" rel="noreferrer">
+                  Medium
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/@StatfusionAI" target="_blank" rel="noreferrer">
+                  YouTube
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Social Links */}
+        <hr className="rule" />
+
         <div className="footer-bottom">
+          <p className="copyright">© {currentYear} Naresh Edagotti. All rights reserved.</p>
           <div className="social-links">
             {socialLinks.map((link) => (
               <SocialLink
@@ -81,10 +124,6 @@ const Footer = () => {
               />
             ))}
           </div>
-          
-          <p className="copyright">
-            © {currentYear} Naresh Edagotti. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>

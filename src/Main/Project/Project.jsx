@@ -1,74 +1,75 @@
-
+import { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import ProjectCard from './ProjectCard';
+import projects, { projectCategories } from '../../data/projects';
 import './Project.css';
 
-const projectsData = [
-  {
-    title: 'TradeWise AI',
-    description: 'A Streamlit-based web app that helps traders analyze stock data, visualize trends, and generate AI-powered forecasts. It integrates Yahoo Finance for real-time stock data, Ollama DeepSeek-R1 for AI insights, and Plotly for interactive visualizations.',
-    technologies: ['Python', 'Streamlit', 'Ollama DeepSeek-R1', 'Yahoo Finance (yfinance)', 'Plotly', 'LangChain'],
-    githubLink: 'https://github.com/Nareshedagotti/stockanalyst'
-  },
-  {
-    title: 'Audio & Video Summarizer',
-    description: 'A smart tool that summarizes YouTube videos, audio files, and video files using Whisper for transcription and Groq LLM for AI-powered summarization. The interface is designed using Gradio for an intuitive user experience.',
-    technologies: ['Python', 'Gradio', 'Whisper LLM', 'Transformers', 'PyTorch', 'LangChain', 'Groq'],
-    githubLink: 'https://github.com/Nareshedagotti/Audio-and-video-summarizer'
-  },
-  {
-    title: 'Crop Recommendation System',
-    description: 'A machine learning-based system that predicts the best crops to grow based on environmental factors using models like Naive Bayes, Random Forest, Decision Tree, Logistic Regression, XGBoost, and SVM.',
-    technologies: ['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'Flask'],
-    githubLink: 'https://github.com/Nareshedagotti/crop-recomndation'
-  },
-  {
-    title: 'Power BI Projects: Sales & HR Data Analysis',
-    description: 'A set of Power BI dashboards showcasing advanced data visualization techniques for Sales and HR data analysis, providing KPIs and actionable insights.',
-    technologies: ['Power BI'],
-    githubLink: 'https://github.com/Nareshedagotti/MERISKILL-Internship-PowerBI-Projects'
-  },
-  {
-    title: 'Document Query System (Groq & Ollama Models)',
-    description: 'A document query system that allows users to upload PDF, DOCX, or TXT files and interact with them using Groq & Ollama AI models. The system extracts text and enables users to query documents dynamically via a Gradio-based interface.',
-    technologies: ['Python', 'Gradio', 'Groq API', 'Ollama', 'LangChain'],
-    githubLink: 'https://github.com/Nareshedagotti/Document-Query-System'
-  },
-  {
-    title: 'Personal Diet Assistant',
-    description: 'A smart AI-powered diet planner that generates personalized meal plans based on user preferences, dietary goals, and restrictions. Built using Groq API & Gradio for an interactive experience.',
-    technologies: ['Python', 'Gradio', 'Groq API'],
-    githubLink: 'https://github.com/Nareshedagotti/Personal-Diet-Assistant-with-Groq'
-  }
-];
-
 const Projects = () => {
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  const visible =
+    activeCategory === 'All'
+      ? projects
+      : projects.filter((project) => project.category === activeCategory);
+
   return (
-    <div className="projects-container">
-      <h2>My Projects</h2>
-      <div className="projects-grid">
-        {projectsData.map((project, index) => (
-          <div key={index} className="project-card">
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <div className="project-technologies">
-              {project.technologies.map((tech, techIndex) => (
-                <span key={techIndex} className="tech-tag">{tech}</span>
-              ))}
-            </div>
-            <div className="project-links">
-              <a 
-                href={project.githubLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn"
-              >
-                View Project
-              </a>
-            </div>
+    <div className="projects-page">
+      <section className="section projects-intro">
+        <div className="container">
+          <div className="section-head centered" data-reveal>
+            <span className="eyebrow">
+              <span className="dot" />
+              {projects.length} shipped projects
+            </span>
+            <h1 className="section-title">
+              Things I&apos;ve <span className="gradient-text">built</span>
+            </h1>
+            <p className="section-subtitle">
+              Machine learning, generative AI and analytics work — each one open source and
+              ready to explore.
+            </p>
           </div>
-        ))}
-      </div>
+
+          <div className="project-filters" data-reveal>
+            {projectCategories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                className={`filter-btn ${activeCategory === category ? 'active' : ''}`}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+                <span className="filter-count">
+                  {category === 'All'
+                    ? projects.length
+                    : projects.filter((project) => project.category === category).length}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="projects-grid">
+            {visible.map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                index={index}
+                delay={(index % 3) * 90}
+              />
+            ))}
+          </div>
+
+          <a
+            className="btn btn-ghost projects-more"
+            href="https://github.com/Nareshedagotti"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            More on GitHub <ArrowUpRight size={18} />
+          </a>
+        </div>
+      </section>
     </div>
-   
   );
 };
 

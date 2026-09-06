@@ -1,148 +1,155 @@
-
-import './About.css';
+import { Download, GraduationCap, Mail, MapPin } from 'lucide-react';
 import resumePDF from '../../assets/Naresh.pdf';
-import logo from '../../assets/about-me.png';
+import portrait from '../../assets/about-me.png';
+import './About.css';
 
+// TODO: replace with your real roles — these came with the original template.
+const experience = [
+  { role: 'Lead Product Designer', company: 'Google', period: '2021 — Present' },
+  { role: 'Senior Product Designer', company: 'Webflow', period: '2018 — 2021' },
+  { role: 'Junior UX/UI Designer', company: 'LinkedIn', period: '2016 — 2018' },
+];
 
-const About = () => {
-  const handleResumeDownload = () => {
-    const link = document.createElement('a');
-    link.href = resumePDF;
-    link.download = 'Naresh.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+const skillGroups = [
+  {
+    title: 'Programming languages',
+    items: ['Python', 'R', 'SQL', 'JavaScript'],
+  },
+  {
+    title: 'Machine learning',
+    items: [
+      'Regression',
+      'Decision Trees',
+      'Random Forest',
+      'XGBoost',
+      'SVM',
+      'CNNs',
+      'RNNs',
+      'LSTMs',
+    ],
+  },
+  {
+    title: 'NLP & GenAI',
+    items: ['BERT', 'GPT', 'T5', 'RAG Pipelines', 'Hugging Face', 'Ollama', 'Groq'],
+  },
+  {
+    title: 'AI frameworks',
+    items: ['LangChain', 'CrewAI', 'TensorFlow', 'PyTorch', 'Flask', 'Streamlit'],
+  },
+  {
+    title: 'Data analysis',
+    items: ['Power BI', 'SPSS', 'Excel', 'NumPy', 'Pandas'],
+  },
+  {
+    title: 'Business skills',
+    items: ['Data Reporting', 'RFP Writing', 'Presentations'],
+  },
+];
 
-  return (
-    <div className="about-container">
-    <section className="hero">
-        <div className="hero-content">
-          <div className="hero-text">
-            <h1>Hello, I am</h1>
-            <h2>Naresh Edagotti</h2>
-            <p>Web Designer | Data Scientist | AI Specialist</p>
-            <div className="hero-buttons">
-              <a
-                href="#"
-                className="btn secondary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleResumeDownload();
-                }}
-              >
-                Download Resume
-              </a>
-            </div>
-          </div>
-          <div className="hero-logo">
-            <img src={logo} alt="Logo" />
-          </div>
+const About = () => (
+  <div className="about-page">
+    <section className="section about-hero">
+      <div className="container about-hero-inner">
+        <div className="about-intro" data-reveal>
+          <span className="eyebrow">
+            <span className="dot" />
+            About me
+          </span>
+          <h1 className="section-title">
+            Hello, I&apos;m <span className="gradient-text">Naresh Edagotti</span>
+          </h1>
+          <p className="about-role">Data Scientist · AI Specialist · Web Designer</p>
+          <p className="section-subtitle">
+            I&apos;m a developer and designer working across web development, machine learning
+            and AI. I care about innovation and user-centred design, and about shipping
+            solutions that make a measurable difference.
+          </p>
+
+          <ul className="about-facts">
+            <li>
+              <MapPin size={16} /> Telangana, India
+            </li>
+            <li>
+              <Mail size={16} /> statfusionai@gmail.com
+            </li>
+            <li>
+              <GraduationCap size={16} /> ML · NLP · Analytics
+            </li>
+          </ul>
+
+          <a className="btn btn-primary" href={resumePDF} download="Naresh-Edagotti-Resume.pdf">
+            <Download size={18} /> Download resume
+          </a>
         </div>
-      </section>
 
-      <section className="about">
-        <h2>About Me</h2>
-        <p>
-          I am a passionate developer and designer with expertise in web development,
-          machine learning, and AI solutions. With a focus on innovation and user-centric
-          design, I aim to deliver exceptional solutions that drive meaningful impact.
-        </p>
-      </section>
-
-      <section className="experience">
-        <h2>Experience</h2>
-        <div className="timeline">
-          <div className="timeline-item">
-            <h3>Lead Product Designer</h3>
-            <p>Google | 2021 - Present</p>
-          </div>
-          <div className="timeline-item">
-            <h3>Senior Product Designer</h3>
-            <p>Webflow | 2018 - 2021</p>
-          </div>
-          <div className="timeline-item">
-            <h3>Junior UX/UI Designer</h3>
-            <p>LinkedIn | 2016 - 2018</p>
-          </div>
+        <div className="about-portrait" data-reveal style={{ '--reveal-delay': '140ms' }}>
+          <img src={portrait} alt="Portrait of Naresh Edagotti" />
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section className="skills">
-        <h2>Technical Skills</h2>
-        <div className="skills-categories">
-          <div className="skill-category">
-            <h3>Programming Languages</h3>
-            <div className="skills-grid">
-              <div className="skill-item">Python</div>
-              <div className="skill-item">R</div>
-              <div className="skill-item">SQL</div>
-              <div className="skill-item">JavaScript</div>
-            </div>
-          </div>
-
-          <div className="skill-category">
-            <h3>Machine Learning</h3>
-            <div className="skills-grid">
-              <div className="skill-item">Regression</div>
-              <div className="skill-item">Decision Trees</div>
-              <div className="skill-item">Random Forest</div>
-              <div className="skill-item">XGBoost</div>
-              <div className="skill-item">SVM</div>
-              <div className="skill-item">CNNs</div>
-              <div className="skill-item">RNNs</div>
-              <div className="skill-item">LSTMs</div>
-            </div>
-          </div>
-
-          <div className="skill-category">
-            <h3>NLP & GenAI</h3>
-            <div className="skills-grid">
-              <div className="skill-item">BERT</div>
-              <div className="skill-item">GPT</div>
-              <div className="skill-item">T5</div>
-              <div className="skill-item">RAG Pipelines</div>
-              <div className="skill-item">Hugging Face</div>
-              <div className="skill-item">Ollama</div>
-              <div className="skill-item">Groq</div>
-            </div>
-          </div>
-
-          <div className="skill-category">
-            <h3>AI Frameworks</h3>
-            <div className="skills-grid">
-              <div className="skill-item">LangChain</div>
-              <div className="skill-item">CrewAI</div>
-              <div className="skill-item">TensorFlow</div>
-              <div className="skill-item">PyTorch</div>
-              <div className="skill-item">Flask</div>
-              <div className="skill-item">Streamlit</div>
-            </div>
-          </div>
-
-          <div className="skill-category">
-            <h3>Data Analysis</h3>
-            <div className="skills-grid">
-              <div className="skill-item">Power BI</div>
-              <div className="skill-item">SPSS</div>
-              <div className="skill-item">Excel</div>
-              <div className="skill-item">NumPy</div>
-              <div className="skill-item">Pandas</div>
-            </div>
-          </div>
-
-          <div className="skill-category">
-            <h3>Business Skills</h3>
-            <div className="skills-grid">
-              <div className="skill-item">Data Reporting</div>
-              <div className="skill-item">RFP Writing</div>
-              <div className="skill-item">Presentations</div>
-            </div>
-          </div>
+    <section className="section about-experience">
+      <div className="container">
+        <div className="section-head" data-reveal>
+          <h2 className="section-title">Experience</h2>
+          <p className="section-subtitle">Where I&apos;ve worked and what I focused on.</p>
         </div>
-      </section>
-    </div>
-  );
-};
+
+        <ol className="timeline">
+          {experience.map((item, index) => (
+            <li
+              key={`${item.company}-${item.role}`}
+              className="timeline-item"
+              data-reveal
+              style={{ '--reveal-delay': `${index * 90}ms` }}
+            >
+              <div className="timeline-marker" aria-hidden="true" />
+              <div className="card timeline-card">
+                <div className="timeline-card-inner">
+                  <span className="timeline-period">{item.period}</span>
+                  <h3>{item.role}</h3>
+                  <p>{item.company}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section className="section about-skills">
+      <div className="container">
+        <div className="section-head" data-reveal>
+          <h2 className="section-title">Technical skills</h2>
+          <p className="section-subtitle">
+            The toolkit I reach for, grouped by the kind of problem it solves.
+          </p>
+        </div>
+
+        <div className="skill-groups">
+          {skillGroups.map((group, index) => (
+            <article
+              key={group.title}
+              className="card skill-group"
+              data-reveal
+              style={{ '--reveal-delay': `${index * 70}ms` }}
+            >
+              <div className="skill-group-inner">
+                <h3>{group.title}</h3>
+                <div className="skill-chips">
+                  {group.items.map((item) => (
+                    <span key={item} className="chip">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+);
 
 export default About;
