@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 import projects, { projectCategories } from '../../data/projects';
+import { pages, socials } from '../../data/site';
 import './Project.css';
+
+const githubHref = socials.find((s) => s.label === 'GitHub').href;
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -22,12 +25,9 @@ const Projects = () => {
               {projects.length} shipped projects
             </span>
             <h1 className="section-title">
-              Things I&apos;ve <span className="gradient-text">built</span>
+              {pages.projects.title} <span className="gradient-text">{pages.projects.titleAccent}</span>
             </h1>
-            <p className="section-subtitle">
-              Machine learning, generative AI and analytics work — each one open source and
-              ready to explore.
-            </p>
+            <p className="section-subtitle">{pages.projects.subtitle}</p>
           </div>
 
           <div className="project-filters" data-reveal>
@@ -61,11 +61,11 @@ const Projects = () => {
 
           <a
             className="btn btn-ghost projects-more"
-            href="https://github.com/Nareshedagotti"
+            href={githubHref}
             target="_blank"
             rel="noopener noreferrer"
           >
-            More on GitHub <ArrowUpRight size={18} />
+            {pages.projects.moreLabel} <ArrowUpRight size={18} />
           </a>
         </div>
       </section>

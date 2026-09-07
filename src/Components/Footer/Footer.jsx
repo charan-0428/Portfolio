@@ -10,27 +10,17 @@ import {
   Youtube,
 } from 'lucide-react';
 import Logo from '../Logo/Logo';
+import { person, socials, footerLinks } from '../../data/site';
 import './Footer.css';
 
-const socialLinks = [
-  { href: 'https://github.com/Nareshedagotti', icon: Github, label: 'GitHub' },
-  {
-    href: 'https://www.linkedin.com/in/naresh-edagotti-6a71a1233/',
-    icon: Linkedin,
-    label: 'LinkedIn',
-  },
-  { href: 'https://www.youtube.com/@StatfusionAI', icon: Youtube, label: 'YouTube' },
-  { href: 'https://medium.com/@statfusionai', icon: PenLine, label: 'Medium' },
-  { href: 'https://www.instagram.com/statfusionai/', icon: Instagram, label: 'Instagram' },
-  { href: 'mailto:statfusionai@gmail.com', icon: Mail, label: 'Email' },
-];
-
-const quickLinks = [
-  { to: '/home', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/project', label: 'Projects' },
-  { to: '/contact', label: 'Contact' },
-];
+const iconMap = {
+  github: Github,
+  linkedin: Linkedin,
+  youtube: Youtube,
+  medium: PenLine,
+  instagram: Instagram,
+  mail: Mail,
+};
 
 const SocialLink = ({ href, icon: Icon, label }) => (
   <a
@@ -58,20 +48,17 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <Logo tagline="AI &amp; Data Science" />
-            <p>
-              Building machine learning, NLP and analytics products that turn data into
-              decisions people can act on.
-            </p>
-            <a className="footer-cta" href="mailto:statfusionai@gmail.com">
-              statfusionai@gmail.com <ArrowUpRight size={16} />
+            <Logo />
+            <p>{person.footerBlurb}</p>
+            <a className="footer-cta" href={`mailto:${person.email}`}>
+              {person.email} <ArrowUpRight size={16} />
             </a>
           </div>
 
           <nav className="footer-nav" aria-label="Footer">
             <h3>Explore</h3>
             <ul>
-              {quickLinks.map((link) => (
+              {footerLinks.map((link) => (
                 <li key={link.to}>
                   <Link to={link.to}>{link.label}</Link>
                 </li>
@@ -82,30 +69,15 @@ const Footer = () => {
           <div className="footer-nav">
             <h3>Elsewhere</h3>
             <ul>
-              <li>
-                <a href="https://github.com/Nareshedagotti" target="_blank" rel="noreferrer">
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/naresh-edagotti-6a71a1233/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a href="https://medium.com/@statfusionai" target="_blank" rel="noreferrer">
-                  Medium
-                </a>
-              </li>
-              <li>
-                <a href="https://www.youtube.com/@StatfusionAI" target="_blank" rel="noreferrer">
-                  YouTube
-                </a>
-              </li>
+              {socials
+                .filter((social) => social.icon !== 'mail')
+                .map((social) => (
+                  <li key={social.label}>
+                    <a href={social.href} target="_blank" rel="noreferrer">
+                      {social.label}
+                    </a>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
@@ -113,16 +85,20 @@ const Footer = () => {
         <hr className="rule" />
 
         <div className="footer-bottom">
-          <p className="copyright">© {currentYear} Naresh Edagotti. All rights reserved.</p>
+          <p className="copyright">© {currentYear} {person.name}. All rights reserved.</p>
           <div className="social-links">
-            {socialLinks.map((link) => (
-              <SocialLink
-                key={link.label}
-                href={link.href}
-                icon={link.icon}
-                label={link.label}
-              />
-            ))}
+            {socials.map((social) => {
+              const Icon = iconMap[social.icon];
+              if (!Icon) return null;
+              return (
+                <SocialLink
+                  key={social.label}
+                  href={social.href}
+                  icon={Icon}
+                  label={social.label}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

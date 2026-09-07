@@ -1,50 +1,8 @@
 import { Download, GraduationCap, Mail, MapPin } from 'lucide-react';
 import resumePDF from '../../assets/Naresh.pdf';
 import portrait from '../../assets/about-me.png';
+import { person, pages, experience, skillGroups } from '../../data/site';
 import './About.css';
-
-// TODO: replace with your real roles — these came with the original template.
-const experience = [
-  { role: 'Lead Product Designer', company: 'Google', period: '2021 — Present' },
-  { role: 'Senior Product Designer', company: 'Webflow', period: '2018 — 2021' },
-  { role: 'Junior UX/UI Designer', company: 'LinkedIn', period: '2016 — 2018' },
-];
-
-const skillGroups = [
-  {
-    title: 'Programming languages',
-    items: ['Python', 'R', 'SQL', 'JavaScript'],
-  },
-  {
-    title: 'Machine learning',
-    items: [
-      'Regression',
-      'Decision Trees',
-      'Random Forest',
-      'XGBoost',
-      'SVM',
-      'CNNs',
-      'RNNs',
-      'LSTMs',
-    ],
-  },
-  {
-    title: 'NLP & GenAI',
-    items: ['BERT', 'GPT', 'T5', 'RAG Pipelines', 'Hugging Face', 'Ollama', 'Groq'],
-  },
-  {
-    title: 'AI frameworks',
-    items: ['LangChain', 'CrewAI', 'TensorFlow', 'PyTorch', 'Flask', 'Streamlit'],
-  },
-  {
-    title: 'Data analysis',
-    items: ['Power BI', 'SPSS', 'Excel', 'NumPy', 'Pandas'],
-  },
-  {
-    title: 'Business skills',
-    items: ['Data Reporting', 'RFP Writing', 'Presentations'],
-  },
-];
 
 const About = () => (
   <div className="about-page">
@@ -56,28 +14,24 @@ const About = () => (
             About me
           </span>
           <h1 className="section-title">
-            Hello, I&apos;m <span className="gradient-text">Naresh Edagotti</span>
+            {pages.about.greeting} <span className="gradient-text">{person.name}</span>
           </h1>
-          <p className="about-role">Data Scientist · AI Specialist · Web Designer</p>
-          <p className="section-subtitle">
-            I&apos;m a developer and designer working across web development, machine learning
-            and AI. I care about innovation and user-centred design, and about shipping
-            solutions that make a measurable difference.
-          </p>
+          <p className="about-role">{person.role}</p>
+          <p className="section-subtitle">{person.bio}</p>
 
           <ul className="about-facts">
             <li>
-              <MapPin size={16} /> Telangana, India
+              <MapPin size={16} /> {person.location}
             </li>
             <li>
-              <Mail size={16} /> statfusionai@gmail.com
+              <Mail size={16} /> {person.email}
             </li>
             <li>
-              <GraduationCap size={16} /> ML · NLP · Analytics
+              <GraduationCap size={16} /> {person.focusAreas}
             </li>
           </ul>
 
-          <a className="btn btn-primary" href={resumePDF} download="Naresh-Edagotti-Resume.pdf">
+          <a className="btn btn-primary" href={resumePDF} download={person.resumeFileName}>
             <Download size={18} /> Download resume
           </a>
         </div>
@@ -91,8 +45,8 @@ const About = () => (
     <section className="section about-experience">
       <div className="container">
         <div className="section-head" data-reveal>
-          <h2 className="section-title">Experience</h2>
-          <p className="section-subtitle">Where I&apos;ve worked and what I focused on.</p>
+          <h2 className="section-title">{pages.about.experienceTitle}</h2>
+          <p className="section-subtitle">{pages.about.experienceSubtitle}</p>
         </div>
 
         <ol className="timeline">
@@ -120,10 +74,8 @@ const About = () => (
     <section className="section about-skills">
       <div className="container">
         <div className="section-head" data-reveal>
-          <h2 className="section-title">Technical skills</h2>
-          <p className="section-subtitle">
-            The toolkit I reach for, grouped by the kind of problem it solves.
-          </p>
+          <h2 className="section-title">{pages.about.skillsTitle}</h2>
+          <p className="section-subtitle">{pages.about.skillsSubtitle}</p>
         </div>
 
         <div className="skill-groups">

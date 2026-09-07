@@ -3,30 +3,14 @@ import { ArrowRight, Download, Github, Sparkles } from 'lucide-react';
 import Section from '../Section/Section';
 import ProjectCard from '../Project/ProjectCard';
 import projects from '../../data/projects';
+import { hero, stack, pages, person } from '../../data/site';
 import portrait from '../../assets/about-me.png';
 import resumePDF from '../../assets/Naresh.pdf';
 import './Home.css';
 
-const stack = [
-  'Python',
-  'PyTorch',
-  'TensorFlow',
-  'LangChain',
-  'Hugging Face',
-  'Scikit-learn',
-  'Power BI',
-  'Streamlit',
-  'SQL',
-  'Groq',
-  'Ollama',
-  'Flask',
-];
-
-const highlights = [
-  { value: 'ML', label: 'Predictive models' },
-  { value: 'NLP', label: 'LLM & RAG pipelines' },
-  { value: 'BI', label: 'Dashboards & insights' },
-];
+const floatIconMap = {
+  sparkles: Sparkles,
+};
 
 const Home = () => {
   const featured = projects.filter((project) => project.featured).slice(0, 3);
@@ -38,43 +22,39 @@ const Home = () => {
           <div className="hero-copy" data-reveal>
             <span className="eyebrow">
               <span className="dot" />
-              Available for new projects
+              {person.availability}
             </span>
 
             <h1 className="hero-title">
-              Transforming intelligence through{' '}
-              <span className="gradient-text nowrap">AI &amp; data</span>
+              {hero.titleLead}{' '}
+              <span className="gradient-text nowrap">{hero.titleAccent}</span>
             </h1>
 
-            <p className="hero-description">
-              I&apos;m Naresh Edagotti — a data scientist and AI engineer building machine
-              learning, NLP and analytics products that turn raw data into decisions people
-              can act on.
-            </p>
+            <p className="hero-description">{hero.description}</p>
 
             <div className="hero-actions">
-              <Link to="/project" className="btn btn-primary">
-                View my work <ArrowRight size={18} />
+              <Link to={hero.primaryCta.to} className="btn btn-primary">
+                {hero.primaryCta.label} <ArrowRight size={18} />
               </Link>
               <a
                 className="btn btn-ghost"
                 href={resumePDF}
-                download="Naresh-Edagotti-Resume.pdf"
+                download={person.resumeFileName}
               >
-                <Download size={18} /> Download resume
+                <Download size={18} /> {hero.secondaryCta.label}
               </a>
               <a
                 className="hero-github"
-                href="https://github.com/Nareshedagotti"
+                href={hero.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github size={18} /> github.com/Nareshedagotti
+                <Github size={18} /> {hero.githubHandle}
               </a>
             </div>
 
             <ul className="hero-highlights">
-              {highlights.map((item) => (
+              {hero.highlights.map((item) => (
                 <li key={item.value}>
                   <strong>{item.value}</strong>
                   <span>{item.label}</span>
@@ -88,27 +68,31 @@ const Home = () => {
               <img src={portrait} alt="Portrait of Naresh Edagotti" />
             </div>
 
-            <div className="float-card float-card-a">
-              <Sparkles size={16} />
-              <div>
-                <strong>RAG pipelines</strong>
-                <small>LangChain · Groq · Ollama</small>
-              </div>
-            </div>
-
-            <div className="float-card float-card-b">
-              <span className="spark-bars" aria-hidden="true">
-                <i style={{ height: '38%' }} />
-                <i style={{ height: '62%' }} />
-                <i style={{ height: '45%' }} />
-                <i style={{ height: '82%' }} />
-                <i style={{ height: '68%' }} />
-              </span>
-              <div>
-                <strong>Analytics</strong>
-                <small>Power BI dashboards</small>
-              </div>
-            </div>
+            {hero.floatCards.map((card, index) => {
+              const FloatIcon = floatIconMap[card.icon];
+              return (
+                <div
+                  key={card.title}
+                  className={`float-card ${index === 0 ? 'float-card-a' : 'float-card-b'}`}
+                >
+                  {card.icon === 'bars' ? (
+                    <span className="spark-bars" aria-hidden="true">
+                      <i style={{ height: '38%' }} />
+                      <i style={{ height: '62%' }} />
+                      <i style={{ height: '45%' }} />
+                      <i style={{ height: '82%' }} />
+                      <i style={{ height: '68%' }} />
+                    </span>
+                  ) : (
+                    <FloatIcon size={16} />
+                  )}
+                  <div>
+                    <strong>{card.title}</strong>
+                    <small>{card.subtitle}</small>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -129,13 +113,11 @@ const Home = () => {
         <div className="container">
           <div className="featured-head" data-reveal>
             <div className="section-head">
-              <h2 className="section-title">Selected work</h2>
-              <p className="section-subtitle">
-                A few projects that show how I take an idea from data to a working product.
-              </p>
+              <h2 className="section-title">{pages.home.featuredTitle}</h2>
+              <p className="section-subtitle">{pages.home.featuredSubtitle}</p>
             </div>
             <Link to="/project" className="btn btn-ghost">
-              All projects <ArrowRight size={18} />
+              {pages.home.allProjectsLabel} <ArrowRight size={18} />
             </Link>
           </div>
 
@@ -155,13 +137,10 @@ const Home = () => {
       <section className="section cta-section">
         <div className="container">
           <div className="cta-card" data-reveal>
-            <h2>Have a data problem worth solving?</h2>
-            <p>
-              Tell me about the outcome you&apos;re after and I&apos;ll tell you what the data
-              can realistically do about it.
-            </p>
+            <h2>{pages.home.ctaTitle}</h2>
+            <p>{pages.home.ctaBody}</p>
             <Link to="/contact" className="btn btn-primary">
-              Start a conversation <ArrowRight size={18} />
+              {pages.home.ctaLabel} <ArrowRight size={18} />
             </Link>
           </div>
         </div>

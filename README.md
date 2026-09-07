@@ -35,13 +35,44 @@ src/
 
 ## Editing the content
 
-- **Projects** — add or edit entries in `src/data/projects.js`. Mark `featured: true`
-  to surface a project on the home page; `category` feeds the filter buttons.
-- **Skills and experience** — the arrays at the top of `src/Main/About/About.jsx`.
-- **Services and stats** — the arrays at the top of `src/Main/Section/Section.jsx`.
-- **Contact details and socials** — `src/Main/Contact/Contact.jsx` and
-  `src/Components/Footer/Footer.jsx`.
-- **Colors, fonts, spacing** — the CSS custom properties in `:root` in `src/index.css`.
+**All personal content lives in one file: `src/data/site.js`.** No component edits
+are needed to re-brand the site.
+
+Start with the identity constants at the top:
+
+```js
+const NAME = 'Naresh Edagotti';
+const EMAIL = 'statfusionai@gmail.com';
+const PHONE = '+91 9553547511';
+const GITHUB_USER = 'Nareshedagotti';
+const TITLE_SUFFIX = 'AI & Data Science Portfolio';
+```
+
+Changing `NAME` alone updates the wordmark and its monogram, the page title and
+meta description, the hero copy, the about heading, the resume filename and the
+footer copyright. `EMAIL`, `PHONE` and `GITHUB_USER` likewise feed every place
+they appear, project repository links included.
+
+The rest of the file is grouped by what it drives:
+
+| Export | Drives |
+| --- | --- |
+| `person` | name, role, bio, location, contact details, availability |
+| `seo` | document title and meta description |
+| `socials` | footer columns, footer icon row, contact card icons |
+| `navLinks`, `navCta`, `footerLinks` | navigation |
+| `hero`, `stack` | home hero, floating cards, highlights, tech marquee |
+| `servicesSection`, `services`, `stats` | the "What I do" section |
+| `experience`, `skillGroups` | about page timeline and skills |
+| `projects` | project cards (`featured: true` also surfaces on the home page; `category` feeds the filters) |
+| `pages` | per-page headings and section copy |
+| `emailjs` | contact form credentials |
+
+`icon` fields are string keys (e.g. `'github'`, `'brain'`), mapped to
+lucide-react components inside the components that render them — so the config
+file itself stays import-free.
+
+**Colors, fonts, spacing** — the CSS custom properties in `:root` in `src/index.css`.
 
 ## Contact form
 

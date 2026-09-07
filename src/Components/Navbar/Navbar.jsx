@@ -2,13 +2,8 @@ import { useEffect, useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Logo from '../Logo/Logo';
+import { person, navLinks, navCta } from '../../data/site';
 import './Navbar.css';
-
-const links = [
-  { to: '/home', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/project', label: 'Projects' },
-];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -42,12 +37,12 @@ const Navbar = () => {
       className={`navbar ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'menu-open' : ''}`}
     >
       <div className="nav-container">
-        <Link to="/" className="navbar-logo" aria-label="Naresh Edagotti — home">
-          <Logo tagline="AI &amp; Data Science" />
+        <Link to="/" className="navbar-logo" aria-label={`${person.name} — home`}>
+          <Logo />
         </Link>
 
         <nav className={`navbar-links ${isMobileMenuOpen ? 'open' : ''}`}>
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
@@ -58,8 +53,8 @@ const Navbar = () => {
               {link.label}
             </NavLink>
           ))}
-          <Link to="/contact" className="btn btn-primary nav-cta">
-            Let&apos;s talk
+          <Link to={navCta.to} className="btn btn-primary nav-cta">
+            {navCta.label}
           </Link>
         </nav>
 

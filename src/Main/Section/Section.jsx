@@ -1,53 +1,25 @@
 import { BarChart3, Bot, Brain, MessagesSquare } from 'lucide-react';
+import { services, servicesSection, stats } from '../../data/site';
 import './Section.css';
 
-const services = [
-  {
-    icon: Brain,
-    title: 'Machine learning & predictive models',
-    description:
-      'I design and implement models that predict outcomes, sharpen decision-making and optimise workflows — from crop recommendation systems to business analytics, using Random Forest, XGBoost and SVM.',
-  },
-  {
-    icon: MessagesSquare,
-    title: 'Natural language processing',
-    description:
-      'Grammar correction tools, sentiment analysis and multilingual chatbots built on BERT, GPT and Whisper, bridging communication gaps in education, business and agriculture.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Data visualization & analytics',
-    description:
-      'Interactive dashboards and visual reports in Power BI and Plotly that make the numbers behind a business legible at a glance.',
-  },
-  {
-    icon: Bot,
-    title: 'AI chatbots & automation',
-    description:
-      'Context-aware assistants built with LangChain and models served through Ollama and Groq, lifting customer support, education and day-to-day operations.',
-  },
-];
-
-const stats = [
-  { value: '500+', label: 'Projects completed' },
-  { value: '98%', label: 'Client satisfaction' },
-  { value: '50+', label: 'AI models built' },
-];
+const iconMap = {
+  brain: Brain,
+  nlp: MessagesSquare,
+  chart: BarChart3,
+  bot: Bot,
+};
 
 const Section = () => (
   <section className="section services">
     <div className="container">
       <div className="section-head centered" data-reveal>
-        <h2 className="section-title">What I do</h2>
-        <p className="section-subtitle">
-          I specialise in data-driven insights and solutions that help businesses reach their
-          goals.
-        </p>
+        <h2 className="section-title">{servicesSection.title}</h2>
+        <p className="section-subtitle">{servicesSection.subtitle}</p>
       </div>
 
       <div className="services-grid">
         {services.map((service, index) => {
-          const Icon = service.icon;
+          const Icon = iconMap[service.icon];
           return (
             <article
               key={service.title}

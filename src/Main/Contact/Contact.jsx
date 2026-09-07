@@ -1,34 +1,53 @@
 import { useState } from 'react';
 import emailjs from 'emailjs-com';
-import { Download, Github, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react';
+import {
+  Download,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  PenLine,
+  Phone,
+  Send,
+  Youtube,
+} from 'lucide-react';
 import resumePDF from '../../assets/Naresh.pdf';
+import {
+  person,
+  socials,
+  contactSocialLabels,
+  pages,
+  emailjs as emailjsConfig,
+} from '../../data/site';
 import './Contact.css';
 
-const EMAILJS_SERVICE_ID = 'service_nmkbkny';
-const EMAILJS_TEMPLATE_ID = 'template_abc456';
-const EMAILJS_PUBLIC_KEY = 'kZlNM4CVpuvFTgBsI';
+const iconMap = {
+  github: Github,
+  linkedin: Linkedin,
+  youtube: Youtube,
+  medium: PenLine,
+  instagram: Instagram,
+  mail: Mail,
+};
 
 const emptyForm = { name: '', email: '', company: '', message: '' };
 
 const details = [
-  { icon: Phone, label: 'Phone', value: '+91 9553547511', href: 'tel:+919553547511' },
+  { icon: Phone, label: 'Phone', value: person.phone, href: person.phoneHref },
   {
     icon: Mail,
     label: 'Email',
-    value: 'statfusionai@gmail.com',
-    href: 'mailto:statfusionai@gmail.com',
+    value: person.email,
+    href: `mailto:${person.email}`,
   },
-  { icon: MapPin, label: 'Location', value: 'Telangana, India' },
+  { icon: MapPin, label: 'Location', value: person.location },
 ];
 
-const socials = [
-  { icon: Github, label: 'GitHub', href: 'https://github.com/Nareshedagotti' },
-  {
-    icon: Linkedin,
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/naresh-edagotti-6a71a1233/',
-  },
-];
+const contactSocials = socials
+  .filter((social) => contactSocialLabels.includes(social.label))
+  .map((social) => ({ ...social, icon: iconMap[social.icon] }))
+  .filter((social) => social.icon);
 
 const Contact = () => {
   const [formData, setFormData] = useState(emptyForm);
@@ -43,7 +62,12 @@ const Contact = () => {
     setStatus({ state: 'sending', message: '' });
 
     emailjs
-      .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { ...formData }, EMAILJS_PUBLIC_KEY)
+      .send(
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        { ...formData },
+        emailjsConfig.publicKey
+      )
       .then(() => {
         setStatus({ state: 'success', message: 'Thanks! Your message is on its way.' });
         setFormData(emptyForm);
@@ -64,14 +88,12 @@ const Contact = () => {
           <div className="section-head centered" data-reveal>
             <span className="eyebrow">
               <span className="dot" />
-              Usually replies within a day
+              {person.replyTime}
             </span>
             <h1 className="section-title">
-              Let&apos;s <span className="gradient-text">work together</span>
+              {pages.contact.title} <span className="gradient-text">{pages.contact.titleAccent}</span>
             </h1>
-            <p className="section-subtitle">
-              Tell me about your project, your data, or the problem you&apos;re stuck on.
-            </p>
+            <p className="section-subtitle">{pages.contact.subtitle}</p>
           </div>
 
           <div className="contact-grid">
@@ -108,7 +130,7 @@ const Contact = () => {
                   </ul>
 
                   <div className="contact-socials">
-                    {socials.map((social) => {
+                    {contactSocials.map((social) => {
                       const Icon = social.icon;
                       return (
                         <a
@@ -127,7 +149,7 @@ const Contact = () => {
                   <a
                     className="btn btn-ghost contact-resume"
                     href={resumePDF}
-                    download="Naresh-Edagotti-Resume.pdf"
+                    download={person.resumeFileName}
                   >
                     <Download size={18} /> Download resume
                   </a>
